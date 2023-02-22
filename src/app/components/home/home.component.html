@@ -1,0 +1,150 @@
+<form>
+  <div class="firstName input">
+    <label for="firstName">First name:</label>
+    <input type="text" />
+    <ng-container
+      *ngIf="
+        form.form.controls['firstName'].errors &&
+        form.form.controls['firstName'].dirty &&
+        form.submitted
+      "
+    >
+      <!-- <p
+        *ngIf="form.form.controls['firstName'].errors['required']"
+        [ngStyle]="{ margin: 0, color: '#f00' }"
+      >
+        First Name is required
+      </p>
+      <p
+        *ngIf="form.form.controls['firstName'].errors['minlength']"
+        [ngStyle]="{ margin: 0, color: '#f00' }"
+      >
+        Minimal length of the first name is 3
+      </p>
+      <p
+        *ngIf="form.form.controls['firstName'].errors['maxlength']"
+        [ngStyle]="{ margin: 0, color: '#f00' }"
+      >
+        Maximal length of the first name is 10
+      </p> -->
+    </ng-container>
+  </div>
+  <div class="lastName input">
+    <label for="lastName">Last name:</label>
+    <input type="text" />
+    <ng-container
+      *ngIf="
+        form.form.controls['lastName'].errors &&
+        form.form.controls['lastName'].dirty &&
+        form.submitted
+      "
+    >
+      <!-- <p
+        *ngIf="form.form.controls['lastName'].errors['required']"
+        [ngStyle]="{ margin: 0, color: '#f00' }"
+      >
+        Last Name is required
+      </p>
+      <p
+        *ngIf="form.form.controls['lastName'].errors['minlength']"
+        [ngStyle]="{ margin: 0, color: '#f00' }"
+      >
+        Minimal length of the last name is 3
+      </p>
+      <p
+        *ngIf="form.form.controls['lastName'].errors['maxlength']"
+        [ngStyle]="{ margin: 0, color: '#f00' }"
+      >
+        Maximal length of the last name is 10
+      </p> -->
+    </ng-container>
+  </div>
+  <div class="age input">
+    <label for="age">Age:</label>
+    <input type="number" />
+    <ng-container
+      *ngIf="
+        form.form.controls['age'].errors &&
+        form.form.controls['age'].dirty &&
+        form.submitted
+      "
+    >
+      <!-- <p
+        *ngIf="form.form.controls['age'].errors['required']"
+        [ngStyle]="{ margin: 0, color: '#f00' }"
+      >
+        Age is required
+      </p>
+      <p
+        *ngIf="form.form.controls['age'].errors['min']"
+        [ngStyle]="{ margin: 0, color: '#f00' }"
+      >
+        Minimal age is 18
+      </p>
+      <p
+        *ngIf="form.form.controls['age'].errors['max']"
+        [ngStyle]="{ margin: 0, color: '#f00' }"
+      >
+        Maximal age is 100
+      </p> -->
+    </ng-container>
+  </div>
+  <div class="hobbies input">
+    <label for="hobbies">Hobbies:</label>
+    <textarea></textarea>
+  </div>
+  <div class="gender input">
+    <div class="option1">
+      <input
+        type="radio"
+        id="male"
+        value="male"
+        [ngStyle]="{ cursor: 'pointer' }"
+      />
+      <label for="male">Male</label>
+    </div>
+    <div class="option2">
+      <input
+        [ngStyle]="{ cursor: 'pointer' }"
+        type="radio"
+        id="female"
+        value="female"
+      />
+      <label for="female">Female</label>
+    </div>
+  </div>
+  <div class="input occupation">
+    <label for="occupation">Occupation:</label>
+    <select>
+      <option [value]="undefined" selected>select</option>
+      <option [value]="occupation.Developer">{{ occupation.Developer }}</option>
+      <option [value]="occupation.Doctor">{{ occupation.Doctor }}</option>
+      <option [value]="occupation.Actor">{{ occupation.Actor }}</option>
+    </select>
+  </div>
+  <div class="email input">
+    <label for="email">Email:</label>
+    <input type="email" />
+    <ng-container
+      *ngIf="
+        form.form.controls['email'].errors &&
+        form.form.controls['email'].dirty &&
+        form.submitted
+      "
+    >
+      <!-- <p
+        *ngIf="form.form.controls['email'].errors['required']"
+        [ngStyle]="{ margin: 0, color: '#f00' }"
+      >
+        Email is required
+      </p>
+      <p
+        *ngIf="form.form.controls['email'].errors['pattern']"
+        [ngStyle]="{ margin: 0, color: '#f00' }"
+      >
+        Wrong email format
+      </p> -->
+    </ng-container>
+  </div>
+  <button type="submit">Register</button>
+</form>
