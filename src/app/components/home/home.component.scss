@@ -14,11 +14,13 @@ form {
     flex-direction: column;
     gap: 2px;
   }
-
+}
+.submitted {
   input[type="text"],
   input[type="number"],
   input[type="email"] {
     outline: none;
+
     &.ng-dirty {
       &.ng-invalid {
         border: 1px solid #f00;

@@ -1,7 +1,31 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  [class.submitted]="isSubmitted"
+>
   <div class="firstName input">
     <label for="firstName">First name:</label>
     <input type="text" formControlName="firstName" />
+    <ng-container
+      *ngIf="
+        form.controls['firstName'].errors &&
+        form.controls['firstName'].dirty &&
+        isSubmitted
+      "
+    >
+      <p
+        *ngIf="form.controls['firstName'].errors['required']"
+        [ngStyle]="{ margin: 0, color: '#F00' }"
+      >
+        First Name is required
+      </p>
+      <p
+        *ngIf="form.controls['firstName'].errors['isUnsafe']"
+        [ngStyle]="{ margin: 0, color: '#F00' }"
+      >
+        {{ form.controls["firstName"].errors["isUnsafe"] }}
+      </p>
+    </ng-container>
   </div>
   <div class="lastName input">
     <label for="lastName">Last name:</label>

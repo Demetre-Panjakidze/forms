@@ -1,6 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+  ValidationErrors,
+} from '@angular/forms';
 import { RegisterForm, Gender, Occupation } from 'src/app/forms.model';
+
+const forbiddenWords: string[] = ['cudisityva1, cudisityva2, cudisityva3'];
+
+function forbiddenWordsValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    return forbiddenWords.includes(control.value)
+      ? { isUnsafe: control.value }
+      : null;
+  };
+}
 
 @Component({
   selector: 'app-home',
@@ -10,6 +27,7 @@ import { RegisterForm, Gender, Occupation } from 'src/app/forms.model';
 export class HomeComponent implements OnInit {
   occupation = Occupation;
   gender = Gender;
+  isSubmitted: boolean = false;
 
   form: FormGroup = this.buildForm();
 
@@ -20,7 +38,8 @@ export class HomeComponent implements OnInit {
       firstName: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(10),
+        Validators.maxLength(20),
+        forbiddenWordsValidator(),
       ]),
       lastName: new FormControl('', [
         Validators.required,
@@ -29,13 +48,10 @@ export class HomeComponent implements OnInit {
       ]),
       age: new FormControl(undefined, [
         Validators.required,
-        Validators.min(3),
-        Validators.max(10),
+        Validators.min(18),
+        Validators.max(100),
       ]),
-      email: new FormControl('', [
-        Validators.required,
-        Validators.pattern('[A-Za-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$'),
-      ]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       hobbies: new FormControl(''),
       occupation: new FormControl(undefined),
       gender: new FormControl(this.gender.Male),
@@ -47,6 +63,7 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isSubmitted = true;
     console.log(this.form);
   }
 }
