@@ -1,3 +1,5 @@
+import { FormControl } from '@angular/forms';
+
 export enum Occupation {
   Developer = 'Developer',
   Doctor = 'Doctor',
@@ -10,11 +12,11 @@ export enum Gender {
 }
 
 export interface RegisterForm {
-  firstName: string;
-  lastName: string;
-  age: number | undefined;
-  email: string;
-  hobbies?: string;
-  occupation?: Occupation;
-  gender: Gender;
+  firstName: FormControl<string | null>;
+  lastName: FormControl<string | null>;
+  age: FormControl<number | undefined | null>;
+  email: FormControl<string | null>;
+  hobbies?: FormControl<string | null>;
+  occupation?: FormControl<Occupation | undefined | null>;
+  gender: FormControl<Gender | null>;
 }
