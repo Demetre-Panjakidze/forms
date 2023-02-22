@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   gender = Gender;
   isSubmitted: boolean = false;
 
-  form: FormGroup = this.buildForm();
+  form: FormGroup<RegisterForm> = this.buildForm();
 
   constructor() {}
 

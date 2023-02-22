@@ -1,4 +1,9 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import {
+  AbstractControl,
+  AsyncValidatorFn,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms';
 import { Observable, map } from 'rxjs';
 
 const forbiddenWords: string[] = ['cudisityva1', 'cudisityva2', 'cudisityva3'];
@@ -30,11 +35,13 @@ class ApiService {
   }
 }
 
-export function UsedMailValidator(): ValidatorFn {
+export function UsedMailValidator(): AsyncValidatorFn {
   return (control: AbstractControl): Observable<ValidationErrors | null> => {
     const apiService = new ApiService();
-    return apiService
-      .checkUsedEmail(control.value)
-      .pipe(map((isUsed) => ({ isUsed })));
+    return apiService.checkUsedEmail(control.value).pipe(
+      map((isUsed) => {
+        return isUsed ? { isUsed } : null;
+      })
+    );
   };
 }
