@@ -7,17 +7,11 @@ import {
   Validators,
   ValidationErrors,
 } from '@angular/forms';
+import {
+  forbiddenWordsValidator,
+  UsedMailValidator,
+} from 'src/app/app.validator';
 import { RegisterForm, Gender, Occupation } from 'src/app/forms.model';
-
-const forbiddenWords: string[] = ['cudisityva1, cudisityva2, cudisityva3'];
-
-function forbiddenWordsValidator(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    return forbiddenWords.includes(control.value)
-      ? { isUnsafe: control.value }
-      : null;
-  };
-}
 
 @Component({
   selector: 'app-home',
@@ -51,7 +45,11 @@ export class HomeComponent implements OnInit {
         Validators.min(18),
         Validators.max(100),
       ]),
-      email: new FormControl('', [Validators.required, Validators.email]),
+      email: new FormControl(
+        '',
+        [Validators.required, Validators.email],
+        [UsedMailValidator()]
+      ),
       hobbies: new FormControl(''),
       occupation: new FormControl(undefined),
       gender: new FormControl(this.gender.Male),

@@ -74,6 +74,32 @@
   <div class="email input">
     <label for="email">Email:</label>
     <input type="email" formControlName="email" />
+    <ng-container
+      *ngIf="
+        form.controls['email'].errors &&
+        form.controls['email'].dirty &&
+        isSubmitted
+      "
+    >
+      <p
+        *ngIf="form.controls['email'].errors['required']"
+        [ngStyle]="{ margin: 0, color: '#F00' }"
+      >
+        Email is required
+      </p>
+      <p
+        *ngIf="form.controls['email'].errors['email']"
+        [ngStyle]="{ margin: 0, color: '#F00' }"
+      >
+        Email is wrong format
+      </p>
+      <p
+        *ngIf="form.controls['email'].errors['isUsed']"
+        [ngStyle]="{ margin: 0, color: '#F00' }"
+      >
+        This email is taken
+      </p>
+    </ng-container>
   </div>
   <button type="submit">Register</button>
 </form>
