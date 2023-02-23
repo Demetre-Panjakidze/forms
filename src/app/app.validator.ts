@@ -25,12 +25,14 @@ const alreadyUsedEmails: string[] = [
 class ApiService {
   checkUsedEmail(email: string): Observable<boolean> {
     return new Observable((observer) => {
-      if (alreadyUsedEmails.includes(email)) {
-        observer.next(true);
-      } else {
-        observer.next(false);
-      }
-      observer.complete();
+      setTimeout(() => {
+        if (alreadyUsedEmails.includes(email)) {
+          observer.next(true);
+        } else {
+          observer.next(false);
+        }
+        observer.complete();
+      }, 2000);
     });
   }
 }

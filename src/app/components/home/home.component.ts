@@ -6,6 +6,7 @@ import {
   ValidatorFn,
   Validators,
   ValidationErrors,
+  FormBuilder,
 } from '@angular/forms';
 import {
   forbiddenWordsValidator,
@@ -23,36 +24,52 @@ export class HomeComponent implements OnInit {
   gender = Gender;
   isSubmitted: boolean = false;
 
+  get plusBtnDisabled() {
+    return this.form.controls.hobbies.length === 5;
+  }
+  get removeBtnDisabled() {
+    return this.form.controls.hobbies.length === 1;
+  }
+
+  hobbies: string[] = [
+    'Playing chess',
+    'hiking',
+    'listening to music',
+    'reading',
+    'smoking',
+    'playing football',
+    'watching football',
+  ];
   form: FormGroup<RegisterForm> = this.buildForm();
 
-  constructor() {}
+  constructor(private fb: FormBuilder) {}
 
   private buildForm() {
-    return new FormGroup<RegisterForm>({
-      firstName: new FormControl('', [
+    return this.fb.group<RegisterForm>({
+      firstName: this.fb.control('', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(20),
         forbiddenWordsValidator(),
       ]),
-      lastName: new FormControl('', [
+      lastName: this.fb.control('', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(10),
       ]),
-      age: new FormControl(undefined, [
+      age: this.fb.control(undefined, [
         Validators.required,
         Validators.min(18),
         Validators.max(100),
       ]),
-      email: new FormControl(
+      email: this.fb.control(
         '',
         [Validators.required, Validators.email],
         [UsedMailValidator()]
       ),
-      hobbies: new FormControl(''),
-      occupation: new FormControl(undefined),
-      gender: new FormControl(this.gender.Male),
+      hobbies: this.fb.array([new FormControl('')]),
+      occupation: this.fb.control(null),
+      gender: this.fb.control(this.gender.Male),
     });
   }
 
@@ -63,5 +80,15 @@ export class HomeComponent implements OnInit {
   onSubmit() {
     this.isSubmitted = true;
     console.log(this.form);
+  }
+
+  addHobbyControll() {
+    const hobbies = this.form.controls.hobbies;
+    hobbies.push(new FormControl(''));
+  }
+
+  removeHobbyControll(index: number) {
+    const hobbies = this.form.controls.hobbies;
+    hobbies.removeAt(index);
   }
 }

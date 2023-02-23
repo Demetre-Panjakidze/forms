@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormArray, FormControl } from '@angular/forms';
 
 export enum Occupation {
   Developer = 'Developer',
@@ -16,7 +16,7 @@ export interface RegisterForm {
   lastName: FormControl<string | null>;
   age: FormControl<number | undefined | null>;
   email: FormControl<string | null>;
-  hobbies?: FormControl<string | null>;
+  hobbies: FormArray<FormControl<string | null>>;
   occupation?: FormControl<Occupation | undefined | null>;
   gender: FormControl<Gender | null>;
 }

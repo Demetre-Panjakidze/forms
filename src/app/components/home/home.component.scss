@@ -4,8 +4,14 @@ form {
   gap: 10px;
   align-items: flex-start;
 
+  p {
+    margin: 0;
+    cursor: pointer;
+  }
+
   label,
-  button {
+  button,
+  select {
     cursor: pointer;
   }
 
@@ -21,14 +27,12 @@ form {
   input[type="email"] {
     outline: none;
 
-    &.ng-dirty {
-      &.ng-invalid {
-        border: 1px solid #f00;
-      }
+    &.ng-invalid {
+      border: 1px solid #f00;
+    }
 
-      &.ng-valid {
-        border: 1px solid #0f0;
-      }
+    &.ng-valid {
+      border: 1px solid #0f0;
     }
   }
 }

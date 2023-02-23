@@ -15,13 +15,13 @@
     >
       <p
         *ngIf="form.controls['firstName'].errors['required']"
-        [ngStyle]="{ margin: 0, color: '#F00' }"
+        [ngStyle]="{ color: '#F00' }"
       >
         First Name is required
       </p>
       <p
         *ngIf="form.controls['firstName'].errors['isUnsafe']"
-        [ngStyle]="{ margin: 0, color: '#F00' }"
+        [ngStyle]="{ color: '#F00' }"
       >
         {{ form.controls["firstName"].errors["isUnsafe"] }}
       </p>
@@ -36,8 +36,38 @@
     <input type="number" formControlName="age" />
   </div>
   <div class="hobbies input">
-    <label for="hobbies">Hobbies:</label>
-    <textarea formControlName="hobbies"></textarea>
+    <p>Hobbies:</p>
+    <div class="hobbies" formArrayName="hobbies">
+      <div
+        class=""
+        *ngFor="
+          let hobbyControl of form.controls.hobbies.controls;
+          let i = index
+        "
+      >
+        <select [formControl]="hobbyControl">
+          <option value="" hidden>select</option>
+          <option *ngFor="let hobby of hobbies" [value]="hobby">
+            {{ hobby }}
+          </option>
+        </select>
+        <button
+          [disabled]="removeBtnDisabled"
+          (click)="removeHobbyControll(i)"
+          type="button"
+        >
+          x
+        </button>
+      </div>
+
+      <button
+        [disabled]="plusBtnDisabled"
+        (click)="addHobbyControll()"
+        type="button"
+      >
+        +
+      </button>
+    </div>
   </div>
   <div class="gender input">
     <div class="option1">
@@ -64,8 +94,8 @@
   </div>
   <div class="input occupation">
     <label for="occupation">Occupation:</label>
-    <select formControlName="occupation">
-      <option [value]="undefined" selected>select</option>
+    <select formControlName="occupation" id="occupation">
+      <option value="null" hidden>select</option>
       <option [value]="occupation.Developer">{{ occupation.Developer }}</option>
       <option [value]="occupation.Doctor">{{ occupation.Doctor }}</option>
       <option [value]="occupation.Actor">{{ occupation.Actor }}</option>
@@ -83,19 +113,19 @@
     >
       <p
         *ngIf="form.controls['email'].errors['required']"
-        [ngStyle]="{ margin: 0, color: '#F00' }"
+        [ngStyle]="{ color: '#F00' }"
       >
         Email is required
       </p>
       <p
         *ngIf="form.controls['email'].errors['email']"
-        [ngStyle]="{ margin: 0, color: '#F00' }"
+        [ngStyle]="{ color: '#F00' }"
       >
         Email is wrong format
       </p>
       <p
         *ngIf="form.controls['email'].errors['isUsed']"
-        [ngStyle]="{ margin: 0, color: '#F00' }"
+        [ngStyle]="{ color: '#F00' }"
       >
         This email is already used
       </p>
