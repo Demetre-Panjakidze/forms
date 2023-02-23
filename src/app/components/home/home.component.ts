@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   private buildForm() {
-    return this.fb.group<RegisterForm>({
+    return new FormGroup<RegisterForm>({
       firstName: this.fb.control('', [
         Validators.required,
         Validators.minLength(3),
