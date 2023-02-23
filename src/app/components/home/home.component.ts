@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   occupation = Occupation;
   gender = Gender;
   isSubmitted: boolean = false;
+  hobbies: any[] = [];
 
   get plusBtnDisabled() {
     return this.form.controls.hobbies.length === 5;
@@ -31,15 +32,6 @@ export class HomeComponent implements OnInit {
     return this.form.controls.hobbies.length === 1;
   }
 
-  hobbies: string[] = [
-    'Playing chess',
-    'hiking',
-    'listening to music',
-    'reading',
-    'smoking',
-    'playing football',
-    'watching football',
-  ];
   form: FormGroup<RegisterForm> = this.buildForm();
 
   constructor(private fb: FormBuilder) {}
@@ -70,11 +62,35 @@ export class HomeComponent implements OnInit {
       hobbies: this.fb.array([new FormControl('')]),
       occupation: this.fb.control(null),
       gender: this.fb.control(this.gender.Male),
+      // ManagerOf: this.fb.control(null),
+      // developerOf: this.fb.control(null),
     });
   }
 
+  private handleOccupation(occupation: Occupation) {
+    switch (occupation) {
+      case Occupation.Developer: {
+        this.form.addControl('developerOf', this.fb.control(''));
+        this.form.removeControl('managerOf');
+        break;
+      }
+      case Occupation.Manager: {
+        this.form.addControl('managerOf', this.fb.control(''));
+        this.form.removeControl('developerOf');
+        break;
+      }
+      case Occupation.Actor: {
+        this.form.removeControl('managerOf');
+        this.form.removeControl('developerOf');
+        break;
+      }
+    }
+  }
+
   ngOnInit() {
-    this.buildForm();
+    this.form.controls.occupation.valueChanges.subscribe((occupation) => {
+      console.log(occupation);
+    });
   }
 
   onSubmit() {

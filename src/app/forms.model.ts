@@ -2,7 +2,7 @@ import { FormArray, FormControl } from '@angular/forms';
 
 export enum Occupation {
   Developer = 'Developer',
-  Doctor = 'Doctor',
+  Manager = 'manager',
   Actor = 'Actor',
 }
 
@@ -17,6 +17,8 @@ export interface RegisterForm {
   age: FormControl<number | undefined | null>;
   email: FormControl<string | null>;
   hobbies: FormArray<FormControl<string | null>>;
-  occupation?: FormControl<Occupation | undefined | null>;
+  occupation: FormControl<Occupation | undefined | null>;
   gender: FormControl<Gender | null>;
+  developerOf?: FormControl<string | null>;
+  managerOf?: FormControl<string | null>;
 }

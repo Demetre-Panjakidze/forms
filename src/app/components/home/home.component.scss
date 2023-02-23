@@ -10,7 +10,6 @@ form {
   }
 
   label,
-  button,
   select {
     cursor: pointer;
   }
@@ -35,4 +34,8 @@ form {
       border: 1px solid #0f0;
     }
   }
+}
+
+.cursorClass {
+  cursor: pointer;
 }

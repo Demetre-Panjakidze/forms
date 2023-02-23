@@ -47,7 +47,13 @@
       >
         <select [formControl]="hobbyControl">
           <option value="" hidden>select</option>
-          <option *ngFor="let hobby of hobbies" [value]="hobby">
+          <option
+            *ngFor="
+              let hobby of hobbies
+                | hobbies : form.value.hobbies : hobbyControl.value
+            "
+            [value]="hobby"
+          >
             {{ hobby }}
           </option>
         </select>
@@ -55,6 +61,7 @@
           [disabled]="removeBtnDisabled"
           (click)="removeHobbyControll(i)"
           type="button"
+          [ngClass]="{ cursorClass: !removeBtnDisabled }"
         >
           x
         </button>
@@ -64,6 +71,7 @@
         [disabled]="plusBtnDisabled"
         (click)="addHobbyControll()"
         type="button"
+        [ngClass]="{ cursorClass: !plusBtnDisabled }"
       >
         +
       </button>
@@ -97,7 +105,7 @@
     <select formControlName="occupation" id="occupation">
       <option value="null" hidden>select</option>
       <option [value]="occupation.Developer">{{ occupation.Developer }}</option>
-      <option [value]="occupation.Doctor">{{ occupation.Doctor }}</option>
+      <option [value]="occupation.Manager">{{ occupation.Manager }}</option>
       <option [value]="occupation.Actor">{{ occupation.Actor }}</option>
     </select>
   </div>
@@ -131,5 +139,5 @@
       </p>
     </ng-container>
   </div>
-  <button type="submit">Register</button>
+  <button type="submit" [ngStyle]="{ cursor: 'pointer' }">Register</button>
 </form>
