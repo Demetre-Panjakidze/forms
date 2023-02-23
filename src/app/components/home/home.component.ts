@@ -62,12 +62,10 @@ export class HomeComponent implements OnInit {
       hobbies: this.fb.array([new FormControl('')]),
       occupation: this.fb.control(null),
       gender: this.fb.control(this.gender.Male),
-      // ManagerOf: this.fb.control(null),
-      // developerOf: this.fb.control(null),
     });
   }
 
-  private handleOccupation(occupation: Occupation) {
+  private handleOccupation(occupation: Occupation | null | undefined) {
     switch (occupation) {
       case Occupation.Developer: {
         this.form.addControl('developerOf', this.fb.control(''));
@@ -89,7 +87,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.form.controls.occupation.valueChanges.subscribe((occupation) => {
-      console.log(occupation);
+      this.handleOccupation(occupation);
     });
   }
 

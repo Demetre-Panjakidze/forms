@@ -109,6 +109,20 @@
       <option [value]="occupation.Actor">{{ occupation.Actor }}</option>
     </select>
   </div>
+  <div
+    *ngIf="form.controls['developerOf']"
+    [ngStyle]="{ display: 'flex', flexDirection: 'column' }"
+  >
+    <label for="developerOf">Developer of:</label>
+    <input type="text" id="developerOf" formControlName="developerOf" />
+  </div>
+  <div
+    *ngIf="form.controls['managerOf']"
+    [ngStyle]="{ display: 'flex', flexDirection: 'column' }"
+  >
+    <label for="managerOf">Manager of:</label>
+    <input type="text" id="managerOf" formControlName="managerOf" />
+  </div>
   <div class="email input">
     <label for="email">Email:</label>
     <input type="email" formControlName="email" />
